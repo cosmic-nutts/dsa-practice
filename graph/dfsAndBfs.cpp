@@ -26,6 +26,27 @@ vector<int> bfsGraph(int first, vector<vector<int>>& adjMatrix) {
     return bfs;
 }
 
+void dfsHelper(int node, vector<vector<int>>& adjMatrix, vector<int>& vis, vector<int>& dfs) {
+    vis[node] = 1;
+    dfs.push_back(node);
+    int n = adjMatrix.size();
+    
+    for(int i = 0; i < n; i++) {
+        if(adjMatrix[node][i] == 1 && !vis[i]) {
+            dfsHelper(i, adjMatrix, vis, dfs);
+        }
+    }
+}
+
+vector<int> dfsGraph(int node, vector<vector<int>>& adjMatrix) {
+    int n = adjMatrix.size();
+    vector<int> vis(n, 0);  // visited array
+    vector<int> dfs;
+    
+    dfsHelper(node, adjMatrix, vis, dfs);
+    return dfs;
+}
+
 int main() {
     // Define the size of the adjacency matrix
     const int n = 5;
@@ -41,10 +62,18 @@ int main() {
     
     // Start BFS from vertex 0
     vector<int> bfs = bfsGraph(0, adjMatrix);
+    vector<int> dfs = dfsGraph(0, adjMatrix);
     
     // Print the BFS traversal
     cout << "BFS traversal: ";
     for(int i : bfs) {
+        cout << i << " ";
+    }
+    cout << endl;
+    
+    // Print the DFS traversal
+    cout << "DFS traversal: ";
+    for(int i : dfs) {
         cout << i << " ";
     }
     cout << endl;
