@@ -3,25 +3,60 @@
 #include <queue>
 using namespace std;
 
-vector<int> toposort(int v, vector<int> adj[]){
+// vector<int> toposort(int v, vector<int> adj[]){
+//     vector<int> indegree(v, 0);
+//     for(int i=0; i<v; i++){
+//         for(auto it: adj[i]){
+//             indegree[it]++;
+//         }
+//     }
+
+//     queue<int> q;
+//     for(int i=0; i<v; i++){
+//         if(indegree[i]==0){
+//             q.push(i);
+//         }
+//     }
+//     vector<int> topo;
+//     while(!q.empty()){
+//         int node=q.front();
+//         q.pop();
+//         topo.push_back(node);
+//         for(auto it:adj[node]){
+//             indegree[it]--;
+//             if(indegree[it]==0){
+//                 q.push(it);
+//             }
+//         }
+//     }
+//     return topo;
+// }
+
+
+
+bool toposort(int v,vector<int>adj[]){
     vector<int> indegree(v, 0);
-    for(int i=0; i<v; i++){
-        for(auto it: adj[i]){
+    queue<int>q;
+
+    for(int i=0;i<v;i++){
+        for(auto it:adj[i]){
             indegree[it]++;
+
         }
     }
 
-    queue<int> q;
-    for(int i=0; i<v; i++){
+    for(int i=0;i<v;i++){
         if(indegree[i]==0){
             q.push(i);
         }
     }
-    vector<int> topo;
+    // vector<int>topo;
+    int cnt=0;
     while(!q.empty()){
         int node=q.front();
         q.pop();
-        topo.push_back(node);
+        // topo.push_back(node);
+        cnt++;
         for(auto it:adj[node]){
             indegree[it]--;
             if(indegree[it]==0){
@@ -29,7 +64,10 @@ vector<int> toposort(int v, vector<int> adj[]){
             }
         }
     }
-    return topo;
+    if(cnt==v){
+        return false;
+    }
+    return true;
 }
 
 int main() {
@@ -45,13 +83,13 @@ int main() {
     adj[2].push_back(3);
     adj[3].push_back(1);
     
-    vector<int> result = toposort(v, adj);
+    bool result = toposort(v, adj);
     
-    cout << "Topological Sort: ";
-    for(int i : result){
-        cout << i << " ";
+    if(result) {
+        cout << "Graph contains a cycle" << endl;
+    } else {
+        cout << "Graph doesn't contain a cycle" << endl;
     }
-    cout << endl;
     
     return 0;
 }
