@@ -21,7 +21,7 @@ vector<int> dijk(int v, vector<pair<int, int>> adj[], int src) {
             int adjnode = it.first;
             int wt = it.second;
             
-            if(dist[node] + wt < dist[adjnode]) {
+            if(dis + wt < dist[adjnode]) {
                 dist[adjnode] = dist[node] + wt;
                 pq.push({dist[adjnode], adjnode});
             }
