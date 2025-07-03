@@ -10,7 +10,7 @@ int largestelement(const vector<int>& arr) {
     int largest = arr[0];
     for (int i = 1; i < arr.size(); i++) {
         if (arr[i] > largest) {
-            largest = arr[i];
+            largest = arr[i]; // fix: should be arr[i], not arr[i+1]
         }
     }
     return largest;
