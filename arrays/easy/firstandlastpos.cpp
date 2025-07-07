@@ -1,7 +1,10 @@
 #include <iostream>
 using namespace std;
 
-int 
+int firstpos(int *arr, int n, int x) {
+    
+    
+}
 
 
 int main() {
