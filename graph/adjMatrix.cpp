@@ -4,6 +4,7 @@ using namespace std;
 int main() {
     int row, col;
     cin>>row>>col;
+    //1based indexing
     int adj[row+1][col+1];
     for(int i=0;i<col;i++){
         int u,v;
